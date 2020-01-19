@@ -13,11 +13,7 @@
  * Contributors:
  *    Matthias Kovatsch - creator and main architect
  *    Achim Kraus (Bosch Software Innovations GmbH) - add saving payload
- *    Marlon W. Santos (Federal University of Pará) - add Observer
- *                                                  - add Menu
- *                                                  - add Functions
- *                                                  - add ErrorMsg
- *                                                  - add UrlMotes
+ *    Marlon W. Santos (Federal University of Pará) - add Observer                                                  
  ******************************************************************************/
 package org.eclipse.californium.examples;
 

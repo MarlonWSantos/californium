@@ -15,7 +15,7 @@ package org.eclipse.californium.examples;
 *    GNU General Public License for more details.
 *
 *    You should have received a copy of the GNU General Public License
-*    along with this program.  If not, see <https://www.gnu.org/licenses/>5.
+*    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 *
 */
 
@@ -95,7 +95,7 @@ public class RoutesMotes{
 
       //Exibe enquanto houver IPs na lista
     while(i<ListIPs.size()){
-      System.out.println(ListIPs.get(i));
+      System.out.print(ListIPs.get(i));
       i++;
     }
     i=0;
