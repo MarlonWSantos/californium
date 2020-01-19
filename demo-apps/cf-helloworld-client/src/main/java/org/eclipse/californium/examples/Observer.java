@@ -44,39 +44,42 @@ import org.eclipse.californium.core.network.config.NetworkConfig.Keys;
 import org.eclipse.californium.core.CoapHandler;
 import org.eclipse.californium.core.CoapObserveRelation;
 
-public class GETClient {
+public class Observer {
+
+	public static void Observer(String[] url) {
 		
-	public static void Get(String args) {
-			 
-		CoapClient client = new CoapClient(args);
-
-			CoapResponse response = null;
-				
-				try {
-					response = client.get();
-				} catch (ConnectorException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+		int i=0;
 			
-				if (response!=null) {
+		CoapClient[] client = new CoapClient[url.length];
+		
+		for (i=0;i<url.length;i++) {
+			client[i] = new CoapClient(url[i]);
+		}
+		
+				BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
+				System.out.println("OBSERVE (press enter to exit)");
 				
-					System.out.println(response.getCode());
-					System.out.println(response.getOptions());
-					System.out.println(response.getResponseText());
-					
-					System.out.println(System.lineSeparator() + "ADVANCED" + System.lineSeparator());
-					// access advanced API with access to more details through
-					// .advanced()
-					System.out.println(Utils.prettyPrint(response));
+				CoapObserveRelation[] relation = new CoapObserveRelation[url.length];
 				
-				}else {
-				System.out.println("No response received.");
-				}			
-			client.shutdown();
-			}
+				for(i=0;i<url.length;i++) {
+				
+					relation[i] = client[i].observe(new CoapHandler() {
+						@Override
+						public void onLoad(CoapResponse response) {
+							System.out.println(response.getResponseText());
+						}
+						@Override
+						public void onError() {
+							System.err.println("Failed");
+						}
+					});
+				}
+							
+		// wait for user
+				try { br.readLine(); } catch (IOException e) { }
+				
+				System.out.println("CANCELLATION");
+				  
+	};
 }
