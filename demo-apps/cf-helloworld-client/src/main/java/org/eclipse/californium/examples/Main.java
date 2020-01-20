@@ -43,15 +43,20 @@ public class Main{
 		
 	int opcao;
 		
-	if (args.length==0) {
+	if (args.length==1) {
 			
-	  String url = "http://[aaaa::c30c:0:0:1]";
+	  String url = "http://["+args[0]+"]";
 		
 	  WgetJava.SetUrl(url);
 	  WgetJava.sendGET();
 	  RoutesMotes.FilterResponse();
 	  RoutesMotes.ShowIPs();
 	  RoutesMotes.ShowRotes();
+	  ResourcesMotes.SetIPs();
+	  ResourcesMotes.ShowCoapIPs();
+	  ResourcesMotes.SetResources();
+	  ResourcesMotes.ShowResources();
+	  
 			
 	  //opcao=Menu();
 

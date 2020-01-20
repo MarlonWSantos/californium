@@ -41,37 +41,63 @@ import org.eclipse.californium.core.CoapObserveRelation;
 
 public class GETClient {
 		
-	public static void Get(String args) {
+  public static void Get(String args) {
 			 
-		CoapClient client = new CoapClient(args);
+    CoapClient client = new CoapClient(args);
 
-			CoapResponse response = null;
+	CoapResponse response = null;
 				
-				try {
-					response = client.get();
-				} catch (ConnectorException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+	  try {
+	    response = client.get();
+	  } catch (ConnectorException e) {
+	  	  // TODO Auto-generated catch block
+	    e.printStackTrace();
+	  } catch (IOException e) {
+	      // TODO Auto-generated catch block
+	    e.printStackTrace();
+	  }
 			
-				if (response!=null) {
+	    if (response!=null) {
 
-				
-					System.out.println(response.getCode());
-					System.out.println(response.getOptions());
-					System.out.println(response.getResponseText());
+		  System.out.println(response.getCode());
+		  System.out.println(response.getOptions());
+		  System.out.println(response.getResponseText());
 					
-					System.out.println(System.lineSeparator() + "ADVANCED" + System.lineSeparator());
-					// access advanced API with access to more details through
-					// .advanced()
-					System.out.println(Utils.prettyPrint(response));
+		  System.out.println(System.lineSeparator() + "ADVANCED" + System.lineSeparator());
+			// access advanced API with access to more details through
+		    // .advanced()
+		  System.out.println(Utils.prettyPrint(response));
 				
-				}else {
-				System.out.println("No response received.");
-				}			
-			client.shutdown();
-			}
+		}else {
+		  System.out.println("No response received.");
+		}			
+		client.shutdown();
+  }
+	
+  public static String Discover(String args) {
+		 
+    CoapClient client = new CoapClient(args);
+
+	CoapResponse response = null;
+		
+	String info = new String();
+		
+	  try{
+	    response = client.get();
+	  }catch (ConnectorException e) {
+	      // TODO Auto-generated catch block
+	    e.printStackTrace();
+	  } catch (IOException e) {
+		  // TODO Auto-generated catch block
+		e.printStackTrace();
+	  }
+			
+	    if (response!=null) {
+		  info = response.getResponseText();
+		}else {
+		  System.out.println("No response received.");
+		}			
+		client.shutdown();
+		  return info;
+  }
 }

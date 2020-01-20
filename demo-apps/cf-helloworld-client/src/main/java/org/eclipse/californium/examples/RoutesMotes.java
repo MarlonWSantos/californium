@@ -112,5 +112,16 @@ public class RoutesMotes{
   public static String GetRoute(int i){
     return ListRoutes.get(i);
   }
+  
+    //Retorna o número de IPs na lista
+  public static int SizeListIPs() {
+    return ListIPs.size();	  
+	  
+  }
+  
+    //Retorna o número de rotas na lista
+  public static int SizeListRoutes() {
+    return ListRoutes.size();
+  }
 
 }
