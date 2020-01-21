@@ -23,11 +23,11 @@ public class Main{
 	System.out.println("CoapObserver.jar + [URL]:5683");
   }
 	/*
-  public static void Functions(int opcao,String url){
+  public static void Functions(int opcao){
 		
 	switch (opcao) {
 	  case 1: 
-	    Observer.Observer(url);
+	    Observer.Observer(ResourcesMotes.GroupCoap());
 		break;
 	  case 2:
 		GETClient.Get(url[0]);
@@ -49,6 +49,8 @@ public class Main{
 		
 	  WgetJava.SetUrl(url);
 	  WgetJava.sendGET();
+	  System.out.println(WgetJava.GetResponse());
+	  RoutesMotes.SetResponse(WgetJava.GetResponse());
 	  RoutesMotes.FilterResponse();
 	  RoutesMotes.ShowIPs();
 	  RoutesMotes.ShowRotes();
@@ -60,7 +62,7 @@ public class Main{
 			
 	  //opcao=Menu();
 
-	  //Functions(opcao,url);
+	//  Functions(opcao);
 	
     }else{ErrorMsg();}
   }

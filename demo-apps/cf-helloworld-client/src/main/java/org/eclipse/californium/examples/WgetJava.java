@@ -29,12 +29,13 @@ import java.net.URL;
 
 public class WgetJava{
     
-	private static String GET_URL;
+	private static String url;
+	private static StringBuffer response;
 
 	
 	  //Armazena a URL do Border Router para buscar os IPs dos motes
 	public static void SetUrl(String args) {
-	  GET_URL = args;		
+	  url = args;		
 	}
 	
 	
@@ -44,7 +45,7 @@ public class WgetJava{
       try{
 
           //Cria um objeto com a URL do Border Router
-		URL obj = new URL(GET_URL);
+		URL obj = new URL(url);
 
           //Abre uma conexão HTTP com a URL indicada
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -70,7 +71,7 @@ public class WgetJava{
 		  String inputLine;
 
             //Cria buffer de String que vai receber o conteúdo do buffer
-		  StringBuffer response = new StringBuffer();
+		  response = new StringBuffer();
 
             //Enquanto linha do buffer for diferente de null,guarda uma linha da mensagem
 		  while ((inputLine = in.readLine()) != null) {
@@ -82,10 +83,7 @@ public class WgetJava{
 
             //Finaliza o buffer que recebeu a mensagem
 		  in.close();
-
-		    //Envia a mensagem para extrair as rotas e IPs  
-		  RoutesMotes.SetResponse(response.toString());
-
+		 
         //Se o código recebido for diferente de HTTP_OK(200) exibe mensagem de erro
       }else{
 			  System.out.println("Error 404: Not Found");
@@ -94,6 +92,11 @@ public class WgetJava{
     }catch(Exception e){
       System.out.println("Servidor não responde ou demora no envio da resposta");
     }
+  }
+	
+    //Retorna a responsa do Border Router	
+  public static String GetResponse() {
+    return response.toString();	  
   }
 
 }

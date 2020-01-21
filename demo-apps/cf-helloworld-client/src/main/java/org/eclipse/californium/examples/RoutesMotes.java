@@ -32,7 +32,6 @@ public class RoutesMotes{
   private static String[] route;
   private static List<String> ListRoutes;
   private static List<String> ListIPs;
-  private static int i;
 
 
     //Armazena as informações dos IPs e das rotas dos motes
@@ -79,12 +78,12 @@ public class RoutesMotes{
 
     System.out.println("\nRotas\n");
 
+    int i=0;
       //Exibe enquanto houver rotas na lista
     while(i<ListRoutes.size()){
       System.out.println(ListRoutes.get(i));
       i++;
     }
-    i=0;
   }
 
 
@@ -93,12 +92,12 @@ public class RoutesMotes{
 
     System.out.println("\nIPs\n");
 
+    int i=0;
       //Exibe enquanto houver IPs na lista
     while(i<ListIPs.size()){
       System.out.print(ListIPs.get(i));
       i++;
     }
-    i=0;
   }
 
 

@@ -37,39 +37,36 @@ public class ResourcesMotes{
   private static String response;
   private static List<String> ListResources;
   private static List<String> ListCoapIPs;
-  private static int i;
 
   
     //Armazena os IPs coap para busca de seus recursos  
   public static void SetIPs(){
 	
-	  //Lista para os IPs
+	  //Cria lista para os IPs
 	ListCoapIPs = new ArrayList<>();
 		  
-	for(i=0;i<RoutesMotes.SizeListIPs();i++) {	  
+	for(int i=0;i<RoutesMotes.SizeListIPs();i++) {	  
 		//Importa os IPs descobertos da rede
 	  ip = RoutesMotes.GetIP(i);
 	    //Muda o prefixo fe80 do IP para aaaa e armazena
-	  ListCoapIPs.add(ip.replace("fe80", "coap://[aaaa").replace("\n","]:5683/.well-known/core/"));
+	  ListCoapIPs.add(ip.replace("fe80", "coap://[aaaa").replace("\n","]"));
 	    //Adiciona uma linha para melhor visualizão do IPs	  
 	  ListCoapIPs.add("\n");
 	}
-    i=0;
   }
   
   public static void SetResources(){
 	
 	  //Lista para os recursos
 	ListResources = new ArrayList<>();
-	
-	for(i=0;i<ListCoapIPs.size();i+=2){
+
+	for(int i=0;i<ListCoapIPs.size();i+=2){
 		
 		  //Adiciona o IP Coap na lista antes de seus recursos
 		ListResources.add("\n"+GetCoapIP(i));
 		
-		
 	    //Faz uma consulta coap dos recursos através do URL COAP
-      response = GETClient.Discover(GetCoapIP(i));
+      response = GETClient.Discover(GetWellKnownCore(i));
 		
 	    //Define o padrão das tags dos recursos na mensagem
       Pattern Res = Pattern.compile("</(.*?)>;");
@@ -80,9 +77,8 @@ public class ResourcesMotes{
 	    //Enquanto encontrar padrões do recursos,adiciona na lista
 	  while (matcherRes.find()) {
 	    ListResources.add(matcherRes.group());
-	  }			
+	  }
 	}
-	i=0;
   }
   
  
@@ -90,13 +86,12 @@ public class ResourcesMotes{
   public static void ShowResources(){
 
     System.out.println("\nRecursos disponíveis\n");
-
+    int i=0;
       //Exibe enquanto houver recursos na lista
     while(i<ListResources.size()){
       System.out.println(ListResources.get(i));
       i++;
     }
-    i=0;
   }
   
     //Exibe os Coap IPs dos motes
@@ -104,12 +99,12 @@ public class ResourcesMotes{
 
     System.out.println("\nCoap IPs\n");
 
+    int i=0;
       //Exibe enquanto houver IPs na lista
     while(i<ListCoapIPs.size()){
       System.out.print(ListCoapIPs.get(i));
       i++;
     }
-    i=0;
   }
 
     //Retorna o Coap IP do mote
@@ -121,6 +116,17 @@ public class ResourcesMotes{
     //Retorna o recurso do mote
   public static String GetResource(int i){
     return ListResources.get(i);
+  }
+  
+    //Retorna a lista inteira de IPs COAP
+  public static String[] GroupCoap(){
+	    //Coverte ListString para array de String
+	  String[] GroupIPs = ListCoapIPs.toArray(new String[0]);
+	  return GroupIPs;
+  }
+  
+  public static String GetWellKnownCore(int i) {
+	return GetCoapIP(i)+":5683/.well-known/core/";  
   }
 
 }
