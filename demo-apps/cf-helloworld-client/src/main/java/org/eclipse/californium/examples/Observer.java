@@ -42,7 +42,7 @@ import org.eclipse.californium.core.CoapObserveRelation;
 
 public class Observer {
 
-	public static void Observer(String[] url) {
+	public static void observer(String[] url) {
 		
 		int i=0;
 			

@@ -29,18 +29,18 @@ import java.net.URL;
 
 public class WgetJava{
     
-	private static String url;
-	private static StringBuffer response;
+	private String url;
+	private StringBuffer response;
 
 	
 	  //Armazena a URL do Border Router para buscar os IPs dos motes
-	public static void SetUrl(String args) {
+	public void setUrl(String args) {
 	  url = args;		
 	}
 	
 	
       //Faz pedido ao Border Router pelo IPs da rede
-	public static void sendGET() throws IOException {
+	public void sendGET() throws IOException {
 
       try{
 
@@ -95,7 +95,7 @@ public class WgetJava{
   }
 	
     //Retorna a responsa do Border Router	
-  public static String GetResponse() {
+  public String getResponse() {
     return response.toString();	  
   }
 

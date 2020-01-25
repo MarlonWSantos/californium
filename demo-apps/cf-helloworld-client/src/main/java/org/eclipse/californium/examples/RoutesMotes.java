@@ -27,21 +27,21 @@ import java.io.*;
 
 public class RoutesMotes{
 
-  private static String response;
-  private static String[] ip;
-  private static String[] route;
-  private static List<String> ListRoutes;
-  private static List<String> ListIPs;
+  private String response;
+  private String[] ip;
+  private String[] route;
+  private List<String> listRoutes;
+  private List<String> listIPs;
 
 
     //Armazena as informações dos IPs e das rotas dos motes
-  public static void SetResponse(String args){
+  public void setResponse(String args){
     response = args;
   }
 
 
     //Filtra e elimina os ruídos das informações dos IPs e das Rotas
-  public static void FilterResponse(){
+  public void filterResponse(){
 
       //Define o padrão de rotas
     Pattern route = Pattern.compile("aaaa:.*s");
@@ -56,71 +56,76 @@ public class RoutesMotes{
     Matcher matcherIP = ip.matcher(response);
 
       //Cria lista para armazenar as rotas
-    ListRoutes = new ArrayList<>();
+    listRoutes = new ArrayList<>();
 
       //Cria lista para armazenar os IPs
-    ListIPs = new ArrayList<>();
+    listIPs = new ArrayList<>();
 
       //Enquanto encontrar padrões da rota,adiciona na lista
     while (matcherRoute.find()) {
-        ListRoutes.add(matcherRoute.group());
+        listRoutes.add(matcherRoute.group());
     }
 
       //Enquanto encontrar padrões de IP,adiciona na lista
     while(matcherIP.find()){
-      ListIPs.add(matcherIP.group());
+      listIPs.add(matcherIP.group());
     }
   }
 
 
     //Exiba as rotas armazenadas
-  public static void ShowRotes(){
+  public void showRotes(){
 
     System.out.println("\nRotas\n");
 
     int i=0;
       //Exibe enquanto houver rotas na lista
-    while(i<ListRoutes.size()){
-      System.out.println(ListRoutes.get(i));
+    while(i<listRoutes.size()){
+      System.out.println(listRoutes.get(i));
       i++;
     }
   }
 
 
     //Exibe os IPs armazenados
-  public static void ShowIPs(){
+  public void showIPs(){
 
     System.out.println("\nIPs\n");
 
     int i=0;
       //Exibe enquanto houver IPs na lista
-    while(i<ListIPs.size()){
-      System.out.print(ListIPs.get(i));
+    while(i<listIPs.size()){
+      System.out.print(listIPs.get(i));
       i++;
     }
   }
 
 
     //Retorna o IP do mote
-  public static String GetIP(int i){
-    return ListIPs.get(i);
+  public String getIP(int i){
+    return listIPs.get(i);
   }
 
 
     //Retorna a rota do mote
-  public static String GetRoute(int i){
-    return ListRoutes.get(i);
+  public String getRoute(int i){
+    return listRoutes.get(i);
   }
   
     //Retorna o número de IPs na lista
-  public static int SizeListIPs() {
-    return ListIPs.size();	  
+  public int sizeListIPs() {
+    return listIPs.size();	  
 	  
   }
   
     //Retorna o número de rotas na lista
-  public static int SizeListRoutes() {
-    return ListRoutes.size();
+  public int sizeListRoutes() {
+    return listRoutes.size();
+  }
+  
+    //Retorna a lista de IPs
+  public List<String> getListIPs(){
+	  return listIPs;
   }
 
 }
